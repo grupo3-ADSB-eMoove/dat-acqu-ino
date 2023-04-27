@@ -21,6 +21,7 @@ const AMBIENTE = "desenvolvimento";
 const serial = async (
   valoresEntrada1,
   valoresEntrada2,
+  valoresEntrada3,
   valoresCorredor1,
   valoresCorredor2
 ) => {
@@ -70,14 +71,16 @@ const serial = async (
       const valores = data.split(";");
       const entrada1 = parseInt(valores[0]);
       const entrada2 = parseInt(valores[1]);
-      const corredor1 = parseInt(valores[2]);
-      const corredor2 = parseInt(valores[3]);
+      const entrada3 = parseInt(valores[2]);
+      const corredor1 = parseInt(valores[3]);
+      const corredor2 = parseInt(valores[4]);
 
       var hora = new Date();
       hora = hora.toLocaleString("pt-BR");
 
       valoresEntrada1.push([entrada1, hora]);
       valoresEntrada2.push([entrada2, hora]);
+      valoresEntrada3.push([entrada3, hora]);
       valoresCorredor1.push([corredor1, hora]);
       valoresCorredor2.push([corredor2, hora]);
 
@@ -207,17 +210,20 @@ const servidor = (
 (async () => {
   const valoresEntrada1 = [];
   const valoresEntrada2 = [];
+  const valoresEntrada3 = [];
   const valoresCorredor1 = [];
   const valoresCorredor2 = [];
   await serial(
     valoresEntrada1,
     valoresEntrada2,
+    valoresEntrada3,
     valoresCorredor1,
     valoresCorredor2
   );
   servidor(
     valoresEntrada1,
     valoresEntrada2,
+    valoresEntrada3,
     valoresCorredor1,
     valoresCorredor2
   );
