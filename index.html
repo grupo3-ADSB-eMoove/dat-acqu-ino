@@ -17,7 +17,8 @@
 </head>
 
 <body>
-    <div id="div_entradas"></div>
+    <div id="div_entradas"></div> <br>
+    <div id="div_alerta"></div>
     <div>
         <h1>Entrada 1</h1>
         <section style="width:100%">
@@ -286,16 +287,21 @@
             var totalEntradas = entrada1 + entrada2 + entrada3
             
             div_entradas.innerHTML = `Entradas: ${totalEntradas}`
+            var mensagem;
             if(totalEntradas < capacidadeMaxima * .10) {
-                alert('Muito vazio!')
+                mensagem = 'Muito vazio!'
             }
             else if(totalEntradas > capacidadeMaxima * .10 && totalEntradas <= capacidadeMaxima * .25) {
-                alert('Vazio')
+                mensagem = 'Vazio'
             } else if(totalEntradas > capacidadeMaxima * .5 && totalEntradas <= capacidadeMaxima * .75) {
-                alert('Cheio')
+                mensagem = 'Cheio'
             } else if(totalEntradas > capacidadeMaxima * .75) {
-                alert('Lotado!')
+                mensagem = 'Lotado!'
+            } else {
+                mensagem = 'Ideal'
             }
+
+            div_alerta.innerHTML = `${mensagem} <br>`
         }, 1000);
 
     </script>
