@@ -31,9 +31,15 @@ const serial = async (
       .createPool({
         // altere!
         // CREDENCIAIS DO BANCO LOCAL - MYSQL WORKBENCH
+<<<<<<< HEAD
         host: "10.18.32.90",
         user: "servidor",
         password: "123",
+=======
+        host: "localhost",
+        user: "root",
+        password: "Odranoel@6969",
+>>>>>>> fdd8fa9d8161575cf4eca2166dd2579b2a59a732
         database: "emoove",
       })
       .promise();
@@ -131,12 +137,15 @@ const serial = async (
             "INSERT INTO capturadados (dtHora, fkSensor, valor) VALUES (now(), 1, ?);",
             [
               entrada1
+<<<<<<< HEAD
             ]
           );
           await poolBancoDados.execute(
             "INSERT INTO capturadados (dtHora, fkSensor, valor) VALUES (now(), 2, ?);",
             [
               entrada2
+=======
+>>>>>>> fdd8fa9d8161575cf4eca2166dd2579b2a59a732
             ]
           );
           console.log(
