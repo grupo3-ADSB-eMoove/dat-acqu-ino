@@ -2,7 +2,7 @@
 
 float area = 15.8;
 int switch_pin = 7;
-float contagem = 0;
+int contador = 0;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -10,24 +10,26 @@ void setup() {
 }
 
 void loop() {
-
+  int contagem = 0;
   int S1Entrada = digitalRead(switch_pin);
-  int S4Entrada;
-  int S2Corredor;
-  int S3Corredor;
-  int S5Entrada;
+  int S4Entrada = 0;
+  int S2Corredor = 0;
+  int S3Corredor = 0;
+  int S5Entrada = 0;
   int clientes = contagem + S4Entrada;
   if (S1Entrada != 1) {
 
     if (S1Entrada == LOW) {
-      contagem++;
+      contagem = 1;
+      contador++;
     };
 
     if (contagem != 0) {
-      S2Corredor = floor(contagem * .2);
-      S3Corredor = floor(contagem * .5);
-      S4Entrada = floor(contagem * .6);
-      S5Entrada = floor(contagem * 2);
+      if(contador == 3){
+         S4Entrada = 1;
+         contador = 0;
+      }
+      
     }
 
     Serial.print(contagem);
@@ -39,7 +41,7 @@ void loop() {
     Serial.print(S2Corredor);
     Serial.print(";");
     Serial.println(S3Corredor);
-   
-    delay(1000);
+    S4Entrada = 0;
+  delay(1000);
   }
 }

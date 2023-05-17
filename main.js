@@ -11,8 +11,7 @@ const SERVIDOR_PORTA = 3300;
 // configure a linha abaixo caso queira que os dados capturados sejam inseridos no banco de dados.
 // false -> nao insere
 // true -> insere
-const HABILITAR_OPERACAO_INSERIR = false;
-
+const HABILITAR_OPERACAO_INSERIR = true;
 // altere o valor da variável AMBIENTE para o valor desejado:
 // API conectada ao banco de dados remoto, SQL Server -> 'producao'
 // API conectada ao banco de dados local, MySQL Workbench - 'desenvolvimento'
@@ -32,10 +31,10 @@ const serial = async (
       .createPool({
         // altere!
         // CREDENCIAIS DO BANCO LOCAL - MYSQL WORKBENCH
-        host: "localhost",
-        user: "USUARIO_DO_BANCO_LOCAL",
-        password: "SENHA_DO_BANCO_LOCAL",
-        database: "DATABASE_LOCAL",
+        host: "10.18.32.90",
+        user: "servidor",
+        password: "123",
+        database: "emoove",
       })
       .promise();
   } else if (AMBIENTE == "producao") {
@@ -114,15 +113,7 @@ const serial = async (
             conn.query(sqlquery);
             console.log(
               "valores inseridos no banco: ",
-              dht11Umidade +
-                ", " +
-                dht11Temperatura +
-                ", " +
-                luminosidade +
-                ", " +
-                lm35Temperatura +
-                ", " +
-                chave
+              entrada1
             );
           }
 
@@ -137,26 +128,20 @@ const serial = async (
           // Este insert irá inserir dados de fk_aquario id=1 (fixo no comando do insert abaixo)
           // >> você deve ter o aquario de id 1 cadastrado.
           await poolBancoDados.execute(
-            "INSERT INTO medida (dht11_umidade, dht11_temperatura, luminosidade, lm35_temperatura, chave, momento, fk_aquario) VALUES (?, ?, ?, ?, ?, now(), 1)",
+            "INSERT INTO capturadados (dtHora, fkSensor, valor) VALUES (now(), 1, ?);",
             [
-              dht11Umidade,
-              dht11Temperatura,
-              luminosidade,
-              lm35Temperatura,
-              chave,
+              entrada1
+            ]
+          );
+          await poolBancoDados.execute(
+            "INSERT INTO capturadados (dtHora, fkSensor, valor) VALUES (now(), 2, ?);",
+            [
+              entrada2
             ]
           );
           console.log(
             "valores inseridos no banco: ",
-            dht11Umidade +
-              ", " +
-              dht11Temperatura +
-              ", " +
-              luminosidade +
-              ", " +
-              lm35Temperatura +
-              ", " +
-              chave
+            entrada1
           );
         } else {
           throw new Error(
