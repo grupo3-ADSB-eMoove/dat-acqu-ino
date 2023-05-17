@@ -128,7 +128,7 @@ const serial = async (
           // Este insert irá inserir dados de fk_aquario id=1 (fixo no comando do insert abaixo)
           // >> você deve ter o aquario de id 1 cadastrado.
           await poolBancoDados.execute(
-            "INSERT INTO capturadados (dtHora, fk_sensor, valor) VALUES (now(), 1, ?);",
+            "INSERT INTO capturadados (dtHora, fkSensor, valor) VALUES (now(), 1, ?);",
             [
               entrada1
             ]
