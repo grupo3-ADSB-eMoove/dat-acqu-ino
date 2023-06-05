@@ -31,15 +31,9 @@ const serial = async (
       .createPool({
         // altere!
         // CREDENCIAIS DO BANCO LOCAL - MYSQL WORKBENCH
-<<<<<<< HEAD
-        host: "10.18.32.90",
-        user: "servidor",
-        password: "123",
-=======
-        host: "localhost",
-        user: "root",
-        password: "Odranoel@6969",
->>>>>>> fdd8fa9d8161575cf4eca2166dd2579b2a59a732
+        host: "10.18.35.67",
+        user: "server",
+        password: "emoove123",
         database: "emoove",
       })
       .promise();
@@ -89,16 +83,16 @@ const serial = async (
       valoresCorredor1.push([corredor1, hora]);
       valoresCorredor2.push([corredor2, hora]);
 
-      console.log(
-        "Entrada Norte " + valoresEntrada1[valoresEntrada1.length - 1]
-      );
-      console.log("Entrada Sul " + valoresEntrada2[valoresEntrada2.length - 1]);
-      console.log(
-        "Corredor Bebidas " + valoresCorredor1[valoresCorredor1.length - 1]
-      );
-      console.log(
-        "Corredor Doces " + valoresCorredor2[valoresCorredor2.length - 1]
-      );
+      // console.log(
+      //   "Entrada Norte " + valoresEntrada1[valoresEntrada1.length - 1]
+      // );
+      // console.log("Entrada Sul " + valoresEntrada2[valoresEntrada2.length - 1]);
+      // console.log(
+      //   "Corredor Bebidas " + valoresCorredor1[valoresCorredor1.length - 1]
+      // );
+      // console.log(
+      //   "Corredor Doces " + valoresCorredor2[valoresCorredor2.length - 1]
+      // );
 
       if (HABILITAR_OPERACAO_INSERIR) {
         if (AMBIENTE == "producao") {
@@ -137,15 +131,12 @@ const serial = async (
             "INSERT INTO capturadados (dtHora, fkSensor, valor) VALUES (now(), 1, ?);",
             [
               entrada1
-<<<<<<< HEAD
             ]
           );
           await poolBancoDados.execute(
             "INSERT INTO capturadados (dtHora, fkSensor, valor) VALUES (now(), 2, ?);",
             [
               entrada2
-=======
->>>>>>> fdd8fa9d8161575cf4eca2166dd2579b2a59a732
             ]
           );
           console.log(
